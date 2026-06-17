@@ -34,11 +34,9 @@ pipeline {
 
     stage("Deploy") {
       steps {
-        dir("${DEPLOY_DIR}") {
-          sh """
-            docker compose --env-file deploy.env -f docker-compose.shopify.yml up -d --force-recreate shopify
-          """
-        }
+        sh """
+          docker compose --env-file ${DEPLOY_ENV} -f ${WORKSPACE}/docker-compose.shopify.yml up -d --force-recreate shopify
+        """
       }
     }
 
