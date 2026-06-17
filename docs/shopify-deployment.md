@@ -36,11 +36,11 @@ The container expects these env vars in `shopify.env`:
 The included `Jenkinsfile`:
 
 - builds the image
-- updates `SHOPIFY_TAG` in `/deployment/deploy.env`
-- redeploys the `shopify` service in `/deployment/docker-compose.app.yml`
+- updates `SHOPIFY_TAG` in `deploy.env`
+- redeploys the `shopify` service in `docker-compose.shopify.yml`
 
-Make sure `/deployment/deploy.env` exists on the Jenkins/deployment host before the pipeline runs.
-Keep `shopify.env` available on that same host or inject it as a Jenkins secret file.
+Make sure `deploy.env` exists in the Jenkins workspace before the pipeline runs.
+Keep `shopify.env` available in the same workspace or inject it as a Jenkins secret file.
 
 ## DNS
 
