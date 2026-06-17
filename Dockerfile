@@ -22,6 +22,6 @@ COPY --from=build /app/build ./build
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/public ./public
 
-EXPOSE 3000
+EXPOSE 3010
 
 CMD ["sh", "-c", "npm run setup && npm run start"]

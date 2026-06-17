@@ -55,7 +55,7 @@ If you use IPv6, add an `AAAA` record too.
 
 ## Reverse proxy
 
-Your proxy or ingress should route `shopify.rapidexpress.pk` to the Shopify app container on port `3000`.
+Your proxy or ingress should route `shopify.rapidexpress.pk` to the Shopify app container on port `3010`.
 
 If you use Nginx, the upstream should point to the container service name on the shared Docker network.
 
