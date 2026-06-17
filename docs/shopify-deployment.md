@@ -59,6 +59,10 @@ Your proxy or ingress should route `shopify.rapidexpress.pk` to the Shopify app 
 
 If you use Nginx, the upstream should point to the container service name on the shared Docker network.
 
+Health check endpoint:
+
+- `https://shopify.rapidexpress.pk/health`
+
 If you want to run the Shopify app alongside your existing RapidEx stack, add a service like this to the shared `docker-compose.app.yml` on the deployment host:
 
 ```yaml
