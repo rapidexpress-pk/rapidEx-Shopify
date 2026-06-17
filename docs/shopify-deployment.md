@@ -37,7 +37,7 @@ The included `Jenkinsfile`:
 
 - builds the image
 - updates `SHOPIFY_TAG` in `/deployment/deploy.env`
-- redeploys the `shopify` service in `/deployment/docker-compose.lb.yml`
+- redeploys the `shopify` service using `/deployment/docker-compose.app.yml` plus `/deployment/docker-compose.lb.yml`
 
 Make sure `/deployment/deploy.env` exists on the Jenkins/deployment host before the pipeline runs.
 Keep `shopify.env` available in `/deployment` or inject it as a Jenkins secret file.
