@@ -3,9 +3,10 @@ pipeline {
 
   environment {
     IMAGE_NAME = "rapidex-shopify"
+    DEPLOY_HOST = "YOUR_VPS_HOST"
+    DEPLOY_USER = "YOUR_VPS_USER"
     DEPLOY_DIR = "/var/www/rapidexpress"
-    DEPLOY_ENV = "${DEPLOY_DIR}/deploy.env"
-    DEPLOY_COMPOSE = "${DEPLOY_DIR}/docker-compose.app.yml"
+    DEPLOY_TARGET = "${DEPLOY_USER}@${DEPLOY_HOST}"
   }
 
   stages {
@@ -27,8 +28,7 @@ pipeline {
     stage("Update deploy.env") {
       steps {
         sh """
-          sed -i 's/^SHOPIFY_TAG=.*/SHOPIFY_TAG=${env.SHA}/' ${DEPLOY_ENV} \
-          || echo "SHOPIFY_TAG=${env.SHA}" >> ${DEPLOY_ENV}
+          ssh ${DEPLOY_TARGET} "if [ -f ${DEPLOY_DIR}/deploy.env ]; then sed -i 's/^SHOPIFY_TAG=.*/SHOPIFY_TAG=${env.SHA}/' ${DEPLOY_DIR}/deploy.env; else echo 'SHOPIFY_TAG=${env.SHA}' > ${DEPLOY_DIR}/deploy.env; fi"
         """
       }
     }
@@ -36,7 +36,7 @@ pipeline {
     stage("Deploy") {
       steps {
         sh """
-          docker compose --env-file ${DEPLOY_ENV} -f ${DEPLOY_COMPOSE} up -d --force-recreate shopify
+          ssh ${DEPLOY_TARGET} "cd ${DEPLOY_DIR} && docker compose --env-file shopify.env -f docker-compose.app.yml up -d --force-recreate shopify"
         """
       }
     }
