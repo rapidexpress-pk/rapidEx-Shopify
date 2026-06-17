@@ -13,7 +13,7 @@ RUN npm run build
 
 FROM base AS runtime
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=3010
 
 COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev && npm cache clean --force
