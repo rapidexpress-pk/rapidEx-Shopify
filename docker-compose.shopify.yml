@@ -1,0 +1,20 @@
+name: rapidex-shopify
+
+services:
+  shopify:
+    image: rapidex-shopify:${SHOPIFY_TAG}
+    env_file: shopify.env
+    restart: unless-stopped
+    expose:
+      - "3000"
+    volumes:
+      - shopify_prisma:/app/prisma
+    networks:
+      - rapidex-network
+
+networks:
+  rapidex-network:
+    external: true
+
+volumes:
+  shopify_prisma:
