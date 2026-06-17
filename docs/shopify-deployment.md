@@ -36,10 +36,10 @@ The container expects these env vars in `shopify.env`:
 The included `Jenkinsfile`:
 
 - builds the image
-- updates `SHOPIFY_TAG` in `/deployment/deploy.env`
-- redeploys the `shopify` service with Docker Compose from the checked-out repo workspace
+- updates `SHOPIFY_TAG` in `/var/www/rapidexpress/deploy.env`
+- redeploys the `shopify` service in `/var/www/rapidexpress/docker-compose.app.yml`
 
-Make sure `/deployment/deploy.env` exists on the server before the pipeline runs.
+Make sure `/var/www/rapidexpress/deploy.env` exists on the server before the pipeline runs.
 Keep `shopify.env` next to the repo on the server or inject it as a Jenkins secret file.
 
 ## DNS

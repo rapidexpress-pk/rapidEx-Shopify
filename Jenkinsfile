@@ -3,8 +3,9 @@ pipeline {
 
   environment {
     IMAGE_NAME = "rapidex-shopify"
-    DEPLOY_DIR = "/deployment"
+    DEPLOY_DIR = "/var/www/rapidexpress"
     DEPLOY_ENV = "${DEPLOY_DIR}/deploy.env"
+    DEPLOY_COMPOSE = "${DEPLOY_DIR}/docker-compose.app.yml"
   }
 
   stages {
@@ -35,7 +36,7 @@ pipeline {
     stage("Deploy") {
       steps {
         sh """
-          docker compose --env-file ${DEPLOY_ENV} -f ${WORKSPACE}/docker-compose.shopify.yml up -d --force-recreate shopify
+          docker compose --env-file ${DEPLOY_ENV} -f ${DEPLOY_COMPOSE} up -d --force-recreate shopify
         """
       }
     }
